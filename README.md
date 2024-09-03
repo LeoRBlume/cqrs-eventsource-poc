@@ -5,16 +5,15 @@ Este repositório contém uma prova de conceito (POC) criada para explorar e ent
 ## Tecnologias Utilizadas
 
 - **Linguagem**: Java 17
-- **Framework**: Spring Boot 3.3.2
+- **Framework**: Spring Boot 2.7.6
+- **Framework de CQRS e Event Sourcing**: Axon Framework
 - **Banco de Dados**: PostgreSQL (utilizado como Event Store)
-- **Mensageria**: Apache Kafka (para processamento assíncrono de eventos)
+- **Containerização**: Docker e Docker Compose
 
 ## Estrutura do Projeto
 
-- `command-service/`: Contém a lógica relacionada aos comandos (escritas). Este serviço recebe os comandos do usuário, valida e persiste os eventos correspondentes.
-- `query-service/`: Contém a lógica para consultas (leituras). Este serviço consome os eventos e atualiza as visões materializadas do estado para permitir consultas eficientes.
-- `event-store/`: Implementação do armazenamento de eventos utilizando PostgreSQL, permitindo o versionamento e a reconstrução do estado atual.
-- `kafka/`: Configuração do Kafka para lidar com a publicação e consumo de eventos entre os serviços de comando e consulta.
+- `command/`: Contém a lógica relacionada aos comandos (escritas). Este serviço recebe os comandos do usuário, valida e persiste os eventos correspondentes.
+- `query/`: Contém a lógica para consultas (leituras). Este serviço consome os eventos e atualiza as visões materializadas do estado para permitir consultas eficientes.
 
 ## Como Executar
 
@@ -29,8 +28,8 @@ Este repositório contém uma prova de conceito (POC) criada para explorar e ent
 1. **Clonar o Repositório**
 
     ```bash
-    git clone https://github.com/seu-usuario/poc-cqrs-event-sourcing.git
-    cd poc-cqrs-event-sourcing
+    git clone https://github.com/LeoRBlume/cqrs-eventsource-poc.git
+    cd cqrs-eventsource-poc.git
     ```
 
 2. **Construir o Projeto**
@@ -48,11 +47,12 @@ Este repositório contém uma prova de conceito (POC) criada para explorar e ent
     ```bash
     docker-compose up -d
     ```
+4. Acessar http://localhost:8024 e dar um complete na instalação.
 
-4. **Acessar os Endpoints**
+5. **Acessar os Endpoints**
 
-    - O serviço de comando estará disponível em: `http://localhost:8080`
-    - O serviço de consulta estará disponível em: `http://localhost:8081`
+   - O serviço de comando estará disponível em: POST `http://localhost:8080/order`
+   - O serviço de consulta estará disponível em: GET `http://localhost:8081/order/{orderId}`
 
 ## Conceitos Explorados
 
@@ -64,14 +64,7 @@ CQRS é uma abordagem que separa a leitura (queries) e a escrita (commands) de u
 
 Event Sourcing é um padrão de design onde o estado de um sistema é determinado a partir de uma sequência de eventos. Ao invés de persistir apenas o estado atual, todos os eventos que levaram ao estado atual são armazenados, permitindo a reconstrução do estado em qualquer ponto do tempo.
 
-## Contribuições
+### Axon Framework
 
-Sinta-se à vontade para fazer um fork deste repositório e enviar pull requests. Sugestões, issues e discussões são bem-vindas.
+O Axon Framework é uma plataforma especializada para construir aplicações baseadas em CQRS e Event Sourcing. Ele facilita a implementação desses padrões, fornecendo infraestrutura para o manuseio de comandos, eventos e consultas, bem como a comunicação entre componentes distribuídos.
 
-## Licença
-
-Este projeto está licenciado sob os termos da licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
-
-
-http://localhost:8024
