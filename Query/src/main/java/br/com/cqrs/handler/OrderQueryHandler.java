@@ -1,4 +1,4 @@
-package br.com.cqrs.persistence;
+package br.com.cqrs.handler;
 
 
 import br.com.cqrs.dtos.OrderResponseDTO;
@@ -13,10 +13,9 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class OrderQuery {
+public class OrderQueryHandler {
 
     private final OrderRepository orderRepository;
-
 
     @QueryHandler
     public OrderResponseDTO handle(FindOrderQuery query) {
