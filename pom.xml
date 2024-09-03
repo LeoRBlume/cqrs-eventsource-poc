@@ -13,7 +13,6 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>CQRS and Evet Source POC</name>
     <modules>
-        <module>QueryCommand</module>
         <module>Command</module>
         <module>Query</module>
     </modules>
